@@ -4,7 +4,7 @@
 - [X] Seeds do Banco - (Inserir Dados)
 - [X] Configurar Next.js - (Coração do Projeto)
 - [X] Tailwind e ShadCN - (Biblioteca de Componentes)
-- [] Git Hooks - (Automatizar regras de push nas branch do Git)
+- [X] Git Hooks - (Automatizar regras de push nas branch do Git)
 
 ## Iniciando o Projeto
 Comandos para rodar o servidor:
