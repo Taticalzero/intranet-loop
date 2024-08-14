@@ -21,7 +21,7 @@
 Faça o clone do repositorio na branch Developer , lá encontra-se o código mais atual que está sendo desenvolvido , conforme a aplicação evolui será migrado para branch master
 
 ## 🚀 URL do Banco - Desenvolvimento (Testes)
-DATABASE_URL="postgresql://intranet_owner:Tj7c8WomhdJU@ep-solitary-night-a5qdvzct.us-east-2.aws.neon.tech/intranet"
+DATABASE_URL="postgresql://intranet_owner:Tj7c8WomhdJU@ep-solitary-night-a5qdvzct.us-east-2.aws.neon.tech/db_loop_dev"
 
 ## 🤝 Colaboradores
 
