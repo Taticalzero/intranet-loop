@@ -10,11 +10,15 @@ datasource db {
 model Usuario {
   id        Int       @id @default(autoincrement())
   nome      String
+  senha     String    
   email     String    @unique
-  creditos  Float
+  creditos  Decimal   @db.Decimal(10,2)
   cargo     String
   imagem    String
   compras   Compra[]
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt 
+  deleted_at  DateTime? 
 }
 
 model Compra {
@@ -31,6 +35,9 @@ model Produto {
   preco       Float
   imagem      String
   itens       UsuarioCompra[]
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  deleted_at  DateTime? 
 }
 
 model UsuarioCompra {
@@ -38,8 +45,9 @@ model UsuarioCompra {
   compraId    Int
   produtoId   Int
   quantidade  Int
-  preco       Float
+  preco       Decimal   @db.Decimal(10,2)
   compra      Compra    @relation(fields: [compraId], references: [id])
   produto     Produto   @relation(fields: [produtoId], references: [id])
+  created_at  DateTime  @default(now())
 }
 
