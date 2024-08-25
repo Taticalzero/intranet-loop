@@ -1,5 +1,5 @@
 import LoginForm from './login-form'
 
-export default function LoginPage() {
+export default function Page() {
   return <LoginForm />
 }

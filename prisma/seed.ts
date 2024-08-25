@@ -1,116 +1,131 @@
-import { Produto } from '@/types/produtoDTO'
-import { Usuario } from '@/types/userDTO'
-
 const { PrismaClient } = require('@prisma/client')
 const bcrypt = require('bcrypt')
 
 const prisma = new PrismaClient()
 
 async function main() {
-  const saltRounds = 10
-  // Criar usuários
-  const usuario1: Usuario = await prisma.usuario.create({
+  // Hash para senha
+  const defaultPassword = await bcrypt.hash(process.env.PASSWORD_RESET, 10)
+
+  // Cria usuarios
+  const user1 = await prisma.usuario.create({
     data: {
-      nome: 'John Doe',
-      email: 'john.doe@example.com',
-      senha: await bcrypt.hash('password123', saltRounds),
-      creditos: 100.0,
-      cargo: 'User',
-      imagem: 'johndoe.png',
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
+      nome: 'João Silva',
+      email: 'joao@example.com',
+      senha: defaultPassword,
+      creditos: 100.5,
+      cargo: 'admin',
+      imagem: 'https://example.com/joao.jpg',
     },
   })
 
-  const usuario2: Usuario = await prisma.usuario.create({
+  const user2 = await prisma.usuario.create({
     data: {
-      nome: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      senha: await bcrypt.hash('password123', saltRounds),
-      creditos: 250.0,
-      cargo: 'Admin',
-      imagem: 'janesmith.png',
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
+      nome: 'Maria Oliveira',
+      email: 'maria@example.com',
+      senha: defaultPassword,
+      creditos: 200.0,
+      cargo: 'user',
+      imagem: 'https://example.com/maria.jpg',
     },
   })
 
-  // Criar produtos
-  const produto1: Produto = await prisma.produto.create({
+  // Cria produtos
+  const produto1 = await prisma.produto.create({
     data: {
       nome: 'Produto 1',
-      preco: 25.0,
-      imagem: 'produto1.png',
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
+      preco: 29.99,
+      imagem: 'https://example.com/produto1.jpg',
     },
   })
 
-  const produto2: Produto = await prisma.produto.create({
+  const produto2 = await prisma.produto.create({
     data: {
       nome: 'Produto 2',
-      preco: 50.0,
-      imagem: 'produto2.png',
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
+      preco: 49.99,
+      imagem: 'https://example.com/produto2.jpg',
     },
   })
 
-  const produto3: Produto = await prisma.produto.create({
-    data: {
-      nome: 'Produto 3',
-      preco: 75.0,
-      imagem: 'produto3.png',
-      created_at: new Date(),
-      updated_at: new Date(),
-      deleted_at: null,
-    },
-  })
-
-  // Criar compras
+  // Cria compras
   await prisma.compra.create({
     data: {
-      usuarioId: usuario1.id,
-      data: new Date(),
+      usuarioId: user1.id,
       itens: {
         create: [
           {
             produtoId: produto1.id,
             quantidade: 2,
-            preco: produto1.preco,
+            preco: 29.99,
           },
           {
             produtoId: produto2.id,
             quantidade: 1,
-            preco: produto2.preco,
+            preco: 49.99,
           },
         ],
       },
     },
   })
 
-  await prisma.compra.create({
+  // Cria sessoes para os usuarios
+  await prisma.sessao.create({
     data: {
-      usuarioId: usuario2.id,
-      data: new Date(),
-      itens: {
-        create: [
-          {
-            produtoId: produto2.id,
-            quantidade: 3,
-            preco: produto2.preco,
-          },
-          {
-            produtoId: produto3.id,
-            quantidade: 1,
-            preco: produto3.preco,
-          },
-        ],
-      },
+      usuarioId: user1.id,
+      sessionToken: 'session-token-1',
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    },
+  })
+
+  await prisma.sessao.create({
+    data: {
+      usuarioId: user2.id,
+      sessionToken: 'session-token-2',
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    },
+  })
+
+  // Cria contas para os usuarios
+  await prisma.conta.create({
+    data: {
+      usuarioId: user1.id,
+      tipo: 'oauth',
+      provedor: 'google',
+      contaProvedorId: 'google-12345',
+      refresh_token: 'refresh-token-1',
+      access_token: 'access-token-1',
+      expires_at: Math.floor(Date.now() / 1000) + 3600,
+      token_type: 'Bearer',
+    },
+  })
+
+  await prisma.conta.create({
+    data: {
+      usuarioId: user2.id,
+      tipo: 'oauth',
+      provedor: 'facebook',
+      contaProvedorId: 'facebook-12345',
+      refresh_token: 'refresh-token-2',
+      access_token: 'access-token-2',
+      expires_at: Math.floor(Date.now() / 1000) + 3600,
+      token_type: 'Bearer',
+    },
+  })
+
+  // Cria verificaçao dos tokens
+  await prisma.verificationtoken.create({
+    data: {
+      identifier: user1.email,
+      token: 'verification-token-1',
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 2),
+    },
+  })
+
+  await prisma.verificationtoken.create({
+    data: {
+      identifier: user2.email,
+      token: 'verification-token-2',
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 2),
     },
   })
 

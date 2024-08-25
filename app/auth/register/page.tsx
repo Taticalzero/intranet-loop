@@ -1,5 +1,5 @@
 import RegisterForm from './register-form'
 
-export default function RegisterPage() {
+export default function Page() {
   return <RegisterForm />
 }

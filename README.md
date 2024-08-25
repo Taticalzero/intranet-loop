@@ -5,9 +5,9 @@
 - [X] Tailwind e ShadCN - (Biblioteca de Componentes)
 - [X] Git Hooks - (Automatizar regras de push nas branch do Git)
 ## 📝 PAGINA DE AUTENTICAÇÃO
-- [ ] Codar a Página de Autenticação
-- [ ] Montar o Schema de Autenticação - React Hooks Forms (Biblioteca que valida formularios)
-- [ ] Integrar os Dados do Schema com o BD
+- [X] Codar a Página de Autenticação
+- [X] Montar o Schema de Autenticação - React Hooks Forms (Biblioteca que valida formularios)
+- [X] Integrar os Dados do Schema com o BD
 - [ ] Fluxo de navegação para HOME
 - [ ] Iniciar a Home Page
 ## 📝 PAGINA HOME

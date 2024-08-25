@@ -12,13 +12,55 @@ model Usuario {
   nome      String
   senha     String    
   email     String    @unique
+  emailVerificado DateTime?
   creditos  Decimal   @db.Decimal(10,2)
   cargo     String
-  imagem    String
-  compras   Compra[]
+  imagem    String?
+  compras    Compra[]
+  contas     Conta[]
+  sessoes    Sessao[]
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt 
   deleted_at  DateTime? 
+}
+
+model Conta {
+  usuarioId         Int 
+  tipo              String
+  provedor          String
+  contaProvedorId   String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+ 
+  @@id([provedor, contaProvedorId])
+}
+ 
+model Sessao {
+  sessionToken String   @unique
+  usuarioId       Int 
+  expires      DateTime
+  user         Usuario     @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
 }
 
 model Compra {

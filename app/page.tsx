@@ -1,5 +1,5 @@
-import LoginPage from './auth/login/page'
+import LoginForm from './auth/login/login-form'
 
 export default function Home() {
-  return <LoginPage />
+  return <LoginForm />
 }
