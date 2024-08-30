@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <DashboardPage>
       <DashboardPageHeader>
-        <DashboardPageHeaderTitle> Intranet </DashboardPageHeaderTitle>
+        <DashboardPageHeaderTitle> Contra-cheques </DashboardPageHeaderTitle>
       </DashboardPageHeader>
     </DashboardPage>
   )

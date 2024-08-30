@@ -9,7 +9,10 @@ export default function Page() {
   return (
     <DashboardPage>
       <DashboardPageHeader>
-        <DashboardPageHeaderTitle> Intranet </DashboardPageHeaderTitle>
+        <DashboardPageHeaderTitle>
+          {' '}
+          Politica de Privacidade{' '}
+        </DashboardPageHeaderTitle>
       </DashboardPageHeader>
     </DashboardPage>
   )

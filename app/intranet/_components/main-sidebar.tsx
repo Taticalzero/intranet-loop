@@ -60,14 +60,14 @@ export function MainSidebar({ user }: MainSidebarProps) {
               Contra-cheques
             </DashboardSidebarNavLink>
             <DashboardSidebarNavLink
-              href="/intranet/contra-cheques"
+              href="/intranet/loja"
               active={isActive('/intranet/loja')}
             >
               <ShoppingCartIcon className="w-3 h-3 mr-3" />
               Loja
             </DashboardSidebarNavLink>
             <DashboardSidebarNavLink
-              href="/intranet/contra-cheques"
+              href="/intranet/clima-gestao"
               active={isActive('/intranet/clima-gestao')}
             >
               <ChartPieIcon className="w-3 h-3 mr-3" />
@@ -86,11 +86,13 @@ export function MainSidebar({ user }: MainSidebarProps) {
             <DashboardSidebarNavLink href="https://www.loopfibra.net.br/site/">
               Site Institucional
             </DashboardSidebarNavLink>
-            <DashboardSidebarNavLink href="/">FAQs</DashboardSidebarNavLink>
-            <DashboardSidebarNavLink href="/">
+            <DashboardSidebarNavLink href="/intranet/faq">
+              FAQs
+            </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink href="/intranet/politica-privacidade">
               Política de Privacidade
             </DashboardSidebarNavLink>
-            <DashboardSidebarNavLink href="/">
+            <DashboardSidebarNavLink href="/intranet/termo-servico">
               Termo de Serviço
             </DashboardSidebarNavLink>
           </DashboardSidebarNavMain>

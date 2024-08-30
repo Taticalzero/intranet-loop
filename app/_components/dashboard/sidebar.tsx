@@ -119,7 +119,9 @@ export function DashboardSidebarFooter({
   children,
 }: DashboardSidebarGenericProps) {
   return (
-    <footer className={cn(['p-6 mt-auto border-t border-border', className])}>
+    <footer
+      className={cn(['p-6 mt-auto border-t border-y border-border', className])}
+    >
       {children}
     </footer>
   )
