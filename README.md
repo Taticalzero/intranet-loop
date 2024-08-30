@@ -32,21 +32,19 @@ DATABASE_URL="postgresql://intranet_owner:Tj7c8WomhdJU@ep-solitary-night-a5qdvzc
 ## 🤝 Colaboradores
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
-[https://github.com/ramonS2999]()
+
 <table>
   <tr>
     <td align="center">
-      <a href="#" title="github-profile">
+      <a href="https://github.com/Taticalzero" title="github-profile">
         <img src="https://avatars.githubusercontent.com/u/52974709?v=4" width="100px;" alt="Foto do Matheus Moura no Github"/><br>
         <sub>
           <b>Matheus Moura</b>
         </sub>
       </a>
     </td>
-  </tr>
- <tr>
     <td align="center">
-      <a href="#" title="github-profile">
+      <a href="https://github.com/ramonS2999" title="github-profile">
         <img src="https://avatars.githubusercontent.com/u/57457051?v=4" width="100px;" alt="Foto de Luis Ramon no Github"/><br>
         <sub>
           <b>Luis Ramon</b>
