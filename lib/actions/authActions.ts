@@ -11,7 +11,6 @@ import {
   sendMail,
 } from '../mail'
 import { signJwt, verifyJwt } from '../jwt'
-import { UserPassWordType } from '@/app/auth/password-reset/pass-reset-form'
 
 type ActivationUser = (
   jwtUserId: string

@@ -20,8 +20,14 @@
 - [X] Mock de dados
 - [X] Componente do Card
 - [X] Logica de Adicionar / Remover do Carrinho
-- [ ] Logica de Controle de Estoque com o Carrinho
-- [ ] Integrar com o BD
+- [X] Logica de Controle de Estoque com o Carrinho
+- [X] Integrar com o BD
+# 📝 PAGINA CONTRA-CHEQUE - WEBSERVICE
+- [ ] Mock de dados
+- [ ] Componente do Card
+- [ ] Logica para consultar Dados do Websevice
+- [ ] Gerar PDF para Download 
+
       
 ## 💻 Iniciando o Projeto
 Faça o clone do repositorio na branch Developer , lá encontra-se o código mais atual que está sendo desenvolvido , conforme a aplicação evolui será migrado para branch master

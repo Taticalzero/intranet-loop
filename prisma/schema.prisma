@@ -47,7 +47,7 @@ model Conta {
  
 model Sessao {
   sessionToken String   @unique
-  usuarioId       Int 
+  usuarioId    Int 
   expires      DateTime
   user         Usuario     @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
  
@@ -74,8 +74,9 @@ model Compra {
 model Produto {
   id          Int       @id @default(autoincrement())
   nome        String
-  preco       Float
+  preco       Decimal   @db.Decimal(10,2)
   imagem      String
+  estoque     Int
   itens       UsuarioCompra[]
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt

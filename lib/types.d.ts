@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { Usuario } from '@prisma/client'
+import { Usuario } from '@/types/Usuarios'
 
 declare module 'next-auth' {
   interface Session {

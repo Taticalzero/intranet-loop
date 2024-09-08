@@ -53,13 +53,16 @@ export const authOptions: AuthOptions = {
           email: user.email,
           cargo: user.cargo,
           imagem: user.imagem,
-          creditos: user.creditos,
+          creditos: user.creditos.toNumber(),
         }
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === 'update' && session.user.creditos) {
+        token.user.creditos = session.user.creditos
+      }
       if (user) token.user = user as unknown as Usuario
       return token
     },

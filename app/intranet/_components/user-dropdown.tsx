@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/app/_components/ui/dropdown-menu'
-import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar'
+import { Avatar, AvatarImage } from '@radix-ui/react-avatar'
 import { GraduationCapIcon, LogOutIcon, SettingsIcon } from 'lucide-react'
 import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
@@ -31,9 +31,8 @@ export function UserDropdown({ user }: UserDropdownProps) {
             <AvatarImage
               className="rounded-full"
               src={user.imagem as string}
-              alt={user.nome as string}
+              alt={user.nome}
             />
-            <AvatarFallback>U</AvatarFallback>
           </Avatar>
 
           <div className="flex flex-col flex-1 space-y-1 text-left">
@@ -42,6 +41,13 @@ export function UserDropdown({ user }: UserDropdownProps) {
             )}
             <p className="text-xs leading-none text-muted-foreground">
               {user.cargo}
+            </p>
+            <p className="text-xs leading-none text-muted-foreground">
+              Créditos:{' '}
+              {Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              }).format(Number(user.creditos))}
             </p>
           </div>
         </Button>
