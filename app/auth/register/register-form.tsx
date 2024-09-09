@@ -24,8 +24,17 @@ const registerSchema = z.object({
       required_error: 'Email é Obrigatório',
     })
     .email({
-      message: 'Email inválido',
-    }),
+      message: 'Email inválido',
+    })
+    .refine(
+      (email) => {
+        const domain = email.split('@')[1]
+        return domain === 'loopfibra.net' || domain === 'loopfibra.com'
+      },
+      {
+        message: 'O email deve ser dos domínios loopfibra.net ou loopfibra.com',
+      }
+    ),
   password: z
     .string({
       required_error: 'Senha é Obrigatória',
@@ -109,7 +118,7 @@ export default function RegisterForm() {
                       <Input
                         type="nome"
                         placeholder="Jose"
-                        style={{ textTransform: 'capitalize' }}
+                        className="capitalize"
                         required
                         title="Insira um nome válido"
                         {...field}
@@ -129,7 +138,7 @@ export default function RegisterForm() {
                       <Input
                         type="sobrenome"
                         placeholder="Jairo"
-                        style={{ textTransform: 'capitalize' }}
+                        className="capitalize"
                         required
                         title="Insira um nome válido"
                         {...field}
