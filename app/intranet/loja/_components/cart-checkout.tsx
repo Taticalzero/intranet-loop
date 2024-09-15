@@ -2,13 +2,13 @@
 
 import { Button } from '@/app/_components/ui/button'
 import { useCartStore } from '@/store'
-import { ScrollArea } from '@radix-ui/react-scroll-area'
 import { ShoppingCart } from 'lucide-react'
 import CheckoutActionMenu from '../_actions/checkoutActionMenu'
 import { Session } from 'next-auth'
 import BuyProduct from '@/lib/actions/buyProduct'
 import { useSession } from 'next-auth/react'
 import { toast } from '@/app/_components/ui/use-toast'
+import { ScrollArea } from '@/app/_components/ui/scroll-area'
 
 type UserData = {
   user: Session['user']
@@ -53,7 +53,7 @@ export default function CartCheckout({ user }: UserData) {
       useStore.toogleCart() // Fecha o carrinho
       toast({
         title: 'Compra realizada com sucesso!',
-        description: `Seu novo saldo é: R$ ${novoSaldo.toFixed(2)}`,
+        description: `Seu novo saldo é: Pts ${novoSaldo.toFixed(2)}`,
       })
     } catch (error) {
       console.error(error)
@@ -89,7 +89,7 @@ export default function CartCheckout({ user }: UserData) {
               <div>
                 <p className="font-medium">{item.nome}</p>
                 <p className="text-xs text-muted-foreground">
-                  R$ {item.preco.toFixed(2)} x {item.estoque}
+                  Pts {item.preco.toFixed(2)} x {item.estoque}
                 </p>
               </div>
               <CheckoutActionMenu produto={item} />
@@ -99,7 +99,7 @@ export default function CartCheckout({ user }: UserData) {
         {useStore.cart.length > 0 && (
           <div className="mt-4">
             <p className="text-lg font-bold">
-              Total:R$ {totalCarrinho.toFixed(2)}{' '}
+              Total: Pts {totalCarrinho.toFixed(2)}{' '}
             </p>
 
             <Button onClick={() => finishCheckout()} className="w-full mt-2">

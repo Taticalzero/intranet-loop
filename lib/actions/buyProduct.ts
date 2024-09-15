@@ -3,7 +3,6 @@
 import { Produto } from '@/types/Produtos'
 import prisma from '../prisma'
 import { revalidatePath } from 'next/cache'
-import { useSession } from 'next-auth/react'
 export default async function BuyProduct(
   userId: number | string,
   total: number,

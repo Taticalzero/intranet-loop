@@ -26,9 +26,11 @@ export default function CardMarket({ produtos, user }: CardMarketProps) {
               />
               <h3 className="font-semibold text-sm mb-1">{produto.nome}</h3>
               <p className="text-lg font-bold mb-1">
+                Pontos : {''}
                 {Intl.NumberFormat('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
+                  style: 'decimal',
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
                 }).format(Number(produto.preco))}
               </p>
               <p className="text-xs text-muted-foreground">
