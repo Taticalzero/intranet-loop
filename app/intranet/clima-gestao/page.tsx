@@ -2,8 +2,9 @@ import {
   DashboardPage,
   DashboardPageHeader,
   DashboardPageHeaderTitle,
-  DashboardPageHeaderNav,
+  DashboardPageMain,
 } from '@/app/_components/dashboard/page'
+import CardForm from './_components/card-form'
 
 export default function Page() {
   return (
@@ -11,6 +12,9 @@ export default function Page() {
       <DashboardPageHeader>
         <DashboardPageHeaderTitle> Clima e Gestão </DashboardPageHeaderTitle>
       </DashboardPageHeader>
+      <DashboardPageMain>
+        <CardForm />
+      </DashboardPageMain>
     </DashboardPage>
   )
 }

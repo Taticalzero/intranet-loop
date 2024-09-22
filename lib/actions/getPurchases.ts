@@ -19,6 +19,7 @@ export default async function getPurchases(userId: string): Promise<Compras[]> {
       nome: purchase.produto.nome,
       quantidade: purchase.quantidade,
       preco: purchase.produto.preco.toNumber(),
+      data: purchase.created_at.toString(),
     }))
     return formatPurchases
   } catch (error) {

@@ -2,6 +2,7 @@
 
 import { Produto } from '@/types/Produtos'
 import prisma from '../prisma'
+import { revalidatePath } from 'next/cache'
 export default async function getProducts(): Promise<Produto[]> {
   try {
     const produtos = await prisma.produto.findMany()
@@ -13,7 +14,6 @@ export default async function getProducts(): Promise<Produto[]> {
       imagem: produto.imagem,
       estoque: produto.estoque,
     }))
-
     return produtosFormatados
   } catch {
     throw new Error('Erro ao buscar os produtos')

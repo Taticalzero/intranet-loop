@@ -1,11 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import './globals.css'
 import { Toaster } from './_components/ui/toaster'
 import { NextAuthProvider } from './providers'
 import Hydrate from './_components/hydrate/hydrate'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Poppins({
+  weight: ['300', '400', '500', '600', '700'],
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: 'Intranet - Loop',

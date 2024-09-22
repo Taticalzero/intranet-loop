@@ -10,33 +10,43 @@ import {
   AvatarImage,
   AvatarFallback,
 } from '@/app/_components/ui/avatar'
-import { Session } from 'next-auth'
 import { useEffect, useState } from 'react'
 import { Compras } from '@/types/Compras'
 import getPurchases from '@/lib/actions/getPurchases'
-import { ShoppingBag } from 'lucide-react'
+import { Calendar, ShoppingBag } from 'lucide-react'
 import { ScrollArea } from '@/app/_components/ui/scroll-area'
 import { Separator } from '@/app/_components/ui/separator'
 import EmptyList from '@/app/_components/empty-list/empty-list'
+import { Usuario } from '@/types/Usuarios'
 
 interface UserDialogProps {
   isOpen: boolean
   onClose: () => void
-  user: Session['user']
+  user: Usuario
 }
 
 export function UserDialog({ isOpen, onClose, user }: UserDialogProps) {
   const [purchases, setPurchases] = useState<Compras[]>([])
+
+  const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }
+    return new Date(dateString).toLocaleDateString('pt-BR', options)
+  }
+
   useEffect(() => {
     async function fetchPurchases() {
-      if (user?.id) {
+      if (user.id && isOpen) {
         const userPurchases = await getPurchases(String(user.id))
         setPurchases(userPurchases)
       }
     }
 
     fetchPurchases()
-  }, [user?.id])
+  }, [user.id, isOpen])
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
@@ -53,7 +63,7 @@ export function UserDialog({ isOpen, onClose, user }: UserDialogProps) {
               <h2 className="text-xl font-semibold">{user.nome}</h2>
               <p className="text-sm text-muted-foreground">
                 Pontos:{' '}
-                <Badge variant="secondary">
+                <Badge variant="default">
                   {Intl.NumberFormat('pt-BR', {
                     style: 'decimal',
                     minimumFractionDigits: 2,
@@ -76,7 +86,7 @@ export function UserDialog({ isOpen, onClose, user }: UserDialogProps) {
                   {purchases.map((item, index) => {
                     const total = item.quantidade * item.preco
                     return (
-                      <div key={index}>
+                      <div key={index} className="space-y-2">
                         <div className="flex justify-between items-start">
                           <div className="space-y-1">
                             <p className="font-medium">{item.nome}</p>
@@ -85,11 +95,15 @@ export function UserDialog({ isOpen, onClose, user }: UserDialogProps) {
                             </Badge>
                           </div>
                           <div className="text-right">
-                            <Badge variant="outline">
+                            <Badge variant="default">
                               Pts: {total.toFixed(2)}
                             </Badge>
                           </div>
                         </div>
+                        <Badge variant="outline">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          {formatDate(item.data)}
+                        </Badge>
                         <Separator className="my-3" />
                       </div>
                     )

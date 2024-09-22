@@ -3,5 +3,5 @@ export type Compras = {
   nome: string
   quantidade: number
   preco: number
-  date: string
+  data: string
 }
