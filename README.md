@@ -6,7 +6,7 @@
 - [X] Git Hooks - (Automatizar regras de push nas branch do Git)
 ## 📝 PAGINA DE AUTENTICAÇÃO
 - [X] Codar a Página de Autenticação
-- [X] Montar o Schema de Autenticação - React Hooks Forms (Biblioteca que valida formularios)
+- [X] Montar o Schema de Autenticação - React Hooks Forms (Biblioteca que valida Formulário)
 - [X] Integrar os Dados do Schema com o BD
 - [X] Fluxo de navegação para HOME
 - [X] Iniciar a Home Page
@@ -19,13 +19,22 @@
 ## 📝 PAGINA PRÊMIOS - LOJA
 - [X] Mock de dados
 - [X] Componente do Card
-- [X] Logica de Adicionar / Remover do Carrinho
-- [X] Logica de Controle de Estoque com o Carrinho
+- [X] Lógica de Adicionar / Remover do Carrinho
+- [X] Lógica de Controle de Estoque com o Carrinho
+- [X] Integrar com o BD
+## 📝 PAGINA CLIMA E GESTÃO 
+- [X] Mock de dados
+- [X] Componente do Card
+- [X] Lógica de Criar Formulário
+- [X] Lógica de Responder Formulário
+- [ ] Lógica de Editar o Formulário
+- [ ] Lógica de Deletar o Formulário
+- [ ] Remodelar a UI da página
 - [X] Integrar com o BD
 # 📝 PAGINA CONTRA-CHEQUE - WEBSERVICE
 - [ ] Mock de dados
 - [ ] Componente do Card
-- [ ] Logica para consultar Dados do Websevice
+- [ ] Lógica para consultar Dados do Websevice
 - [ ] Gerar PDF para Download 
 
       

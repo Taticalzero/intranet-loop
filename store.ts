@@ -69,3 +69,105 @@ export const useCartStore = create<CartState>()(
     { name: 'cart-storage' }
   )
 )
+
+export type QuestionType = 'short' | 'paragraph' | 'multiple'
+
+export interface Question {
+  id: string
+  type: QuestionType
+  title: string
+  options?: string[]
+}
+
+interface FormState {
+  formTitle: string
+  questions: Question[]
+  setFormTitle: (title: string) => void
+  addQuestion: () => void
+  updateQuestion: (id: string, updates: Partial<Question>) => void
+  removeQuestion: (id: string) => void
+  addOption: (questionId: string) => void
+  updateOption: (questionId: string, optionIndex: number, value: string) => void
+  removeOption: (questionId: string, optionIndex: number) => void
+  clearQuestions: () => void
+}
+
+export const useSurveyStore = create<FormState>()(
+  persist(
+    (set) => ({
+      formTitle: '',
+      questions: [],
+      setFormTitle: (title) => set(() => ({ formTitle: title })),
+      addQuestion: () =>
+        set((state) => ({
+          questions: [
+            ...state.questions,
+            {
+              id: Date.now().toString(),
+              type: 'short',
+              title: '',
+            },
+          ],
+        })),
+
+      updateQuestion: (id, updates) =>
+        set((state) => ({
+          questions: state.questions.map((q) =>
+            q.id === id ? { ...q, ...updates } : q
+          ),
+        })),
+
+      removeQuestion: (id) =>
+        set((state) => ({
+          questions: state.questions.filter((q) => q.id !== id),
+        })),
+
+      addOption: (questionId) =>
+        set((state) => ({
+          questions: state.questions.map((q) => {
+            if (q.id === questionId) {
+              return {
+                ...q,
+                options: [
+                  ...(q.options || []),
+                  `Opção ${(q.options?.length || 0) + 1}`,
+                ],
+              }
+            }
+            return q
+          }),
+        })),
+
+      updateOption: (questionId, optionIndex, value) =>
+        set((state) => ({
+          questions: state.questions.map((q) => {
+            if (q.id === questionId && q.options) {
+              const newOptions = [...q.options]
+              newOptions[optionIndex] = value
+              return { ...q, options: newOptions }
+            }
+            return q
+          }),
+        })),
+
+      removeOption: (questionId, optionIndex) =>
+        set((state) => ({
+          questions: state.questions.map((q) => {
+            if (q.id === questionId && q.options) {
+              return {
+                ...q,
+                options: q.options.filter((_, index) => index !== optionIndex),
+              }
+            }
+            return q
+          }),
+        })),
+
+      clearQuestions: () =>
+        set(() => ({
+          questions: [],
+        })),
+    }),
+    { name: 'survey-storage' }
+  )
+)

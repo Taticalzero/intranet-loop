@@ -7,131 +7,80 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/app/_components/ui/dialog'
 import { Input } from '@/app/_components/ui/input'
 import { Label } from '@/app/_components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/app/_components/ui/radio-group'
-import { ScrollArea } from '@/app/_components/ui/scroll-area'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/app/_components/ui/select'
 import { Textarea } from '@/app/_components/ui/textarea'
+import createSurvey from '@/lib/actions/createSurvey'
+import { useSurveyStore, Question, QuestionType } from '@/store'
 import { PlusCircle, Trash2 } from 'lucide-react'
-import { useState } from 'react'
 
 interface DialogFormProps {
   isOpen: boolean
   onClose: () => void
 }
 
-type QuestionType = 'short' | 'paragraph' | 'multiple'
-
-interface Question {
-  id: string
-  type: QuestionType
-  title: string
-  options?: string[]
-}
-
 export default function DialogForm({ isOpen, onClose }: DialogFormProps) {
-  const [formTitle, setFormTitle] = useState('Untitled Form')
-  const [questions, setQuestions] = useState<Question[]>([])
+  const {
+    formTitle,
+    questions,
+    setFormTitle,
+    addQuestion,
+    updateQuestion,
+    removeQuestion,
+    addOption,
+    updateOption,
+    removeOption,
+    clearQuestions,
+  } = useSurveyStore()
 
-  const addQuestion = () => {
-    const newQuestion: Question = {
-      id: Date.now().toString(),
-      type: 'short',
-      title: 'Untitled Question',
-      options: ['Option 1'],
-    }
-    setQuestions([...questions, newQuestion])
-  }
-
-  const updateQuestion = (id: string, updates: Partial<Question>) => {
-    setQuestions(questions.map((q) => (q.id === id ? { ...q, ...updates } : q)))
-  }
-
-  const removeQuestion = (id: string) => {
-    setQuestions(questions.filter((q) => q.id !== id))
-  }
-
-  const addOption = (questionId: string) => {
-    setQuestions(
-      questions.map((q) => {
-        if (q.id === questionId) {
-          return {
-            ...q,
-            options: [
-              ...(q.options || []),
-              `Option ${(q.options?.length || 0) + 1}`,
-            ],
-          }
-        }
-        return q
-      })
-    )
-  }
-
-  const updateOption = (
-    questionId: string,
-    optionIndex: number,
-    value: string
-  ) => {
-    setQuestions(
-      questions.map((q) => {
-        if (q.id === questionId && q.options) {
-          const newOptions = [...q.options]
-          newOptions[optionIndex] = value
-          return { ...q, options: newOptions }
-        }
-        return q
-      })
-    )
-  }
-
-  const removeOption = (questionId: string, optionIndex: number) => {
-    setQuestions(
-      questions.map((q) => {
-        if (q.id === questionId && q.options) {
-          return {
-            ...q,
-            options: q.options.filter((_, index) => index !== optionIndex),
-          }
-        }
-        return q
-      })
-    )
-  }
-
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
-    console.log('Form submitted:', { formTitle, questions })
+    const formData = {
+      title: formTitle,
+      questions: questions,
+    }
+    await createSurvey(formData)
+    setFormTitle('')
+    clearQuestions()
     onClose()
   }
 
   const renderQuestionEdit = (question: Question) => {
     return (
       <div key={question.id} className="bg-white shadow-sm rounded-lg p-6 mb-6">
-        <div className="flex justify-between mb-4">
+        <div className="flex justify-between items-center mb-4 space-x-4">
           <Input
             value={question.title}
             onChange={(e) =>
               updateQuestion(question.id, { title: e.target.value })
             }
-            className="w-3/4 border-0 border-b border-gray-200 rounded-none px-0 font-medium text-lg focus-visible:ring-0 focus-visible:border-gray-300"
-            placeholder="Question"
+            className="flex-grow border-0 border-b border-gray-200 rounded-none px-0 font-medium text-lg focus-visible:ring-0 focus-visible:border-gray-300"
+            placeholder="Pergunta"
           />
-          <select
+          <Select
             value={question.type}
-            onChange={(e) =>
-              updateQuestion(question.id, {
-                type: e.target.value as QuestionType,
-              })
+            onValueChange={(value) =>
+              updateQuestion(question.id, { type: value as QuestionType })
             }
-            className="border rounded p-2 text-sm"
           >
-            <option value="short">Short answer</option>
-            <option value="paragraph">Paragraph</option>
-            <option value="multiple">Multiple choice</option>
-          </select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Tipo de Pergunta" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="short">Resposta Pequena</SelectItem>
+              <SelectItem value="paragraph">Parágrafo</SelectItem>
+              <SelectItem value="multiple">Multipla Escolha</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
         {question.type === 'multiple' && (
           <div className="space-y-2 mt-4">
@@ -161,7 +110,7 @@ export default function DialogForm({ isOpen, onClose }: DialogFormProps) {
               onClick={() => addOption(question.id)}
               className="mt-2"
             >
-              Add Option
+              Adicionar Opção
             </Button>
           </div>
         )}
@@ -171,7 +120,7 @@ export default function DialogForm({ isOpen, onClose }: DialogFormProps) {
           onClick={() => removeQuestion(question.id)}
           className="mt-4"
         >
-          Remove Question
+          Remover Questão
         </Button>
       </div>
     )
@@ -180,9 +129,9 @@ export default function DialogForm({ isOpen, onClose }: DialogFormProps) {
   const renderQuestionPreview = (question: Question) => {
     switch (question.type) {
       case 'short':
-        return <Input placeholder="Short answer text" className="w-full" />
+        return <Input placeholder="Resposta Pequena" className="w-full" />
       case 'paragraph':
-        return <Textarea placeholder="Long answer text" className="w-full" />
+        return <Textarea placeholder="Resposta Grande" className="w-full" />
       case 'multiple':
         return (
           <RadioGroup>
@@ -215,11 +164,11 @@ export default function DialogForm({ isOpen, onClose }: DialogFormProps) {
         <div className="flex-grow overflow-y-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
             <div className="space-y-6">
-              <h2 className="text-lg font-semibold">Edição do formulário</h2>
+              <h2 className="text-lg font-semibold">Criação do Formulário</h2>
               <Input
                 value={formTitle}
                 onChange={(e) => setFormTitle(e.target.value)}
-                placeholder="Form Title"
+                placeholder="Título do Formulário"
                 className="w-full"
               />
               {questions.map(renderQuestionEdit)}
