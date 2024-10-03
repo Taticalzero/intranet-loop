@@ -50,8 +50,8 @@ model Sessao {
   usuarioId    Int
   expires      DateTime
   user         Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
 
 model VerificationToken {
@@ -93,6 +93,18 @@ model UsuarioCompra {
   created_at DateTime @default(now())
 }
 
+model FormularioResposta {
+  id           Int        @id @default(autoincrement())
+  formularioId Int
+  formulario   Formulario @relation(fields: [formularioId], references: [id])
+  userId       String
+  respostas    Json 
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([formularioId, userId])
+}
+
 model Formulario {
   id         Int       @id @default(autoincrement())
   titulo     String
@@ -100,18 +112,19 @@ model Formulario {
   dataLimite DateTime
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
+
+  FormularioResposta FormularioResposta[]
 }
 
 model Questao {
   id           Int        @id @default(autoincrement())
   formularioId Int
   formulario   Formulario @relation(fields: [formularioId], references: [id])
-  tipo         String
+  tipo         QuestaoTipo
   titulo       String
   opcoes       Opcao[]
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
-  respostas    Resposta[]
 }
 
 model Opcao {
@@ -123,11 +136,8 @@ model Opcao {
   updatedAt DateTime @updatedAt
 }
 
-model Resposta {
-  id         Int      @id @default(autoincrement())
-  questaoId  Int
-  questao    Questao   @relation(fields: [questaoId], references: [id])
-  resposta   String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+enum QuestaoTipo {
+  short
+  paragraph
+  multiple
 }

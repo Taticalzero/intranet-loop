@@ -13,9 +13,9 @@ async function main() {
       nome: 'João Silva',
       email: 'joao@example.com',
       senha: defaultPassword,
-      creditos: 100.5,
+      creditos: 3000.0,
       cargo: 'admin',
-      imagem: 'https://example.com/joao.jpg',
+      imagem: 'https://i.ibb.co/BB5zkTM/loop-logo.jpg',
     },
   })
 
@@ -24,9 +24,9 @@ async function main() {
       nome: 'Maria Oliveira',
       email: 'maria@example.com',
       senha: defaultPassword,
-      creditos: 200.0,
+      creditos: 900.0,
       cargo: 'user',
-      imagem: 'https://example.com/maria.jpg',
+      imagem: 'https://i.ibb.co/BB5zkTM/loop-logo.jpg',
     },
   })
 
@@ -36,6 +36,7 @@ async function main() {
       nome: 'Produto 1',
       preco: 29.99,
       imagem: 'https://example.com/produto1.jpg',
+      estoque: 10,
     },
   })
 
@@ -44,6 +45,7 @@ async function main() {
       nome: 'Produto 2',
       preco: 49.99,
       imagem: 'https://example.com/produto2.jpg',
+      estoque: 25,
     },
   })
 

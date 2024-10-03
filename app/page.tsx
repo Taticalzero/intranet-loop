@@ -1,5 +1,5 @@
-import LoginForm from './auth/login/login-form'
+import Page from './intranet/page'
 
 export default function Home() {
-  return <LoginForm />
+  return <Page />
 }

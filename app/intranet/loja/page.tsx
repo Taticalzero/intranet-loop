@@ -6,13 +6,12 @@ import {
 } from '@/app/_components/dashboard/page'
 import CardMarket from './_components/card-market'
 import getProducts from '@/lib/actions/getProducts'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import { getServerSession } from 'next-auth'
+import { getSession } from 'next-auth/react'
 import { Usuario } from '@/types/Usuarios'
 
 export default async function Page() {
   let produtos = await getProducts()
-  const session = await getServerSession(authOptions)
+  const session = await getSession()
   const user = session?.user
   return (
     <DashboardPage>

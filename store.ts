@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Produto } from './types/Produtos'
+import { Opcao, Question } from './types/Formulario'
 
 type CartState = {
   cart: Produto[]
@@ -70,15 +71,6 @@ export const useCartStore = create<CartState>()(
   )
 )
 
-export type QuestionType = 'short' | 'paragraph' | 'multiple'
-
-export interface Question {
-  id: string
-  type: QuestionType
-  title: string
-  options?: string[]
-}
-
 interface FormState {
   formTitle: string
   questions: Question[]
@@ -122,28 +114,38 @@ export const useSurveyStore = create<FormState>()(
           questions: state.questions.filter((q) => q.id !== id),
         })),
 
-      addOption: (questionId) =>
+      addOption: (questionId: string) =>
         set((state) => ({
           questions: state.questions.map((q) => {
             if (q.id === questionId) {
+              const newOptions: Opcao[] = [
+                ...(q.options || []),
+                {
+                  id: (q.options?.length || 0) + 1,
+                  valor: `Opção ${(q.options?.length || 0) + 1}`,
+                  questaoId: parseInt(q.id),
+                },
+              ]
               return {
                 ...q,
-                options: [
-                  ...(q.options || []),
-                  `Opção ${(q.options?.length || 0) + 1}`,
-                ],
+                options: newOptions,
               }
             }
             return q
           }),
         })),
 
-      updateOption: (questionId, optionIndex, value) =>
+      updateOption: (questionId: string, optionIndex: number, value: string) =>
         set((state) => ({
           questions: state.questions.map((q) => {
             if (q.id === questionId && q.options) {
               const newOptions = [...q.options]
-              newOptions[optionIndex] = value
+              if (newOptions[optionIndex]) {
+                newOptions[optionIndex] = {
+                  ...newOptions[optionIndex],
+                  valor: value,
+                }
+              }
               return { ...q, options: newOptions }
             }
             return q

@@ -4,16 +4,23 @@ import {
   DashboardPageHeaderTitle,
   DashboardPageMain,
 } from '@/app/_components/dashboard/page'
-import CardForm from './_components/card-form'
+import SurveyForm from './_components/survey-form'
+import { getServerSession } from 'next-auth'
+import { Usuario } from '@/types/Usuarios'
+import { getSurveysForms } from '@/lib/actions/surveyActions'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
-export default function Page() {
+export default async function Page() {
+  const forms = await getSurveysForms()
+  const session = await getServerSession(authOptions)
+  const user = session?.user
   return (
     <DashboardPage>
       <DashboardPageHeader>
         <DashboardPageHeaderTitle> Clima e Gestão </DashboardPageHeaderTitle>
       </DashboardPageHeader>
       <DashboardPageMain>
-        <CardForm />
+        <SurveyForm user={user as Usuario} forms={forms} />
       </DashboardPageMain>
     </DashboardPage>
   )

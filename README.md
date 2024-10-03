@@ -27,10 +27,16 @@
 - [X] Componente do Card
 - [X] Lógica de Criar Formulário
 - [X] Lógica de Responder Formulário
-- [ ] Lógica de Editar o Formulário
-- [ ] Lógica de Deletar o Formulário
-- [ ] Remodelar a UI da página
+- [X] Lógica de Editar o Formulário
+- [X] Lógica de Deletar o Formulário
+- [X] Remodelar a UI da página
 - [X] Integrar com o BD
+## 📝 DASHBOARD COM GRÁFICOS
+- [ ] Mock de dados
+- [ ] Componente do Gráfico
+- [ ] Integrar com o BD
+- [ ] Exibir Relátorios do Clima (Admin)
+- [ ] Exibir Resultados do Callcenter (User)
 # 📝 PAGINA CONTRA-CHEQUE - WEBSERVICE
 - [ ] Mock de dados
 - [ ] Componente do Card
