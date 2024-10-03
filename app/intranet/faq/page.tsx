@@ -2,7 +2,6 @@ import {
   DashboardPage,
   DashboardPageHeader,
   DashboardPageHeaderTitle,
-  DashboardPageHeaderNav,
   DashboardPageMain,
 } from '@/app/_components/dashboard/page'
 import EmptyList from '@/app/_components/empty-list/empty-list'

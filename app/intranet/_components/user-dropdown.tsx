@@ -19,6 +19,7 @@ import { Session } from 'next-auth'
 import { signOut } from 'next-auth/react'
 import { UserDialog } from './user-dialog'
 import { useState } from 'react'
+import Link from 'next/link'
 
 type UserDropdownProps = {
   user: Session['user']
@@ -74,10 +75,6 @@ export function UserDropdown({ user }: UserDropdownProps) {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <GraduationCapIcon className="w-3 h-3 mr-3" />
-              Loop Academy
-            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
               <SettingsIcon className="w-3 h-3 mr-3" />
               Configurações

@@ -4,8 +4,7 @@ import {
   DashboardPageHeaderTitle,
   DashboardPageMain,
 } from '@/app/_components/dashboard/page'
-import EmptyList from '@/app/_components/empty-list/empty-list'
-import { ServerCrash } from 'lucide-react'
+import PrivacyPolicy from './_components/card-policy'
 
 export default function Page() {
   return (
@@ -16,7 +15,7 @@ export default function Page() {
         </DashboardPageHeaderTitle>
       </DashboardPageHeader>
       <DashboardPageMain>
-        <EmptyList message="Em contrução" icon={ServerCrash} />
+        <PrivacyPolicy />
       </DashboardPageMain>
     </DashboardPage>
   )

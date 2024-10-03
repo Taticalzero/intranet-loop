@@ -86,6 +86,9 @@ export function MainSidebar({ user }: MainSidebarProps) {
             <DashboardSidebarNavLink href="https://www.loopfibra.net.br/site/">
               Site Institucional
             </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink href="https://academy.loopfibra.com/">
+              Loop Academy
+            </DashboardSidebarNavLink>
             <DashboardSidebarNavLink href="/intranet/faq">
               FAQs
             </DashboardSidebarNavLink>
