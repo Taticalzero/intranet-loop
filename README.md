@@ -31,6 +31,13 @@
 - [X] Lógica de Deletar o Formulário
 - [X] Remodelar a UI da página
 - [X] Integrar com o BD
+## 📝 PÁGINA DE DENÚNCIA
+- [X] Mock de dados
+- [ ] Desenvolver o CRUD da Página
+- [ ] Regras de ADMIN / USER
+- [ ] Lógica para integrar ao banco de dados
+## 📝 SWITCH MODO DARK/LIGHT (COMPONENTE)
+- [ ] Criar um botão no topo da APP para trocar o template
 ## 📝 DASHBOARD COM GRÁFICOS
 - [ ] Mock de dados
 - [ ] Componente do Gráfico

@@ -16,6 +16,7 @@ import {
 } from '@/app/_components/dashboard/sidebar'
 import { Logo } from '@/app/_components/logo/logo'
 import {
+  AlertTriangleIcon,
   ChartPieIcon,
   HomeIcon,
   ShoppingCartIcon,
@@ -72,6 +73,13 @@ export function MainSidebar({ user }: MainSidebarProps) {
             >
               <ChartPieIcon className="w-3 h-3 mr-3" />
               Clima e Gestão
+            </DashboardSidebarNavLink>
+            <DashboardSidebarNavLink
+              href="/intranet/denuncia"
+              active={isActive('/intranet/denuncia')}
+            >
+              <AlertTriangleIcon className="w-3 h-3 mr-3" />
+              Denúncia
             </DashboardSidebarNavLink>
           </DashboardSidebarNavMain>
         </DashboardSidebarNav>
