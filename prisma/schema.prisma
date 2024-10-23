@@ -19,6 +19,7 @@ model Usuario {
   compras         Compra[]
   contas          Conta[]
   sessoes         Sessao[]
+  denuncias       Denuncia[]
   created_at      DateTime  @default(now())
   updated_at      DateTime  @updatedAt
   deleted_at      DateTime?
@@ -140,4 +141,20 @@ enum QuestaoTipo {
   short
   paragraph
   multiple
+}
+
+model Denuncia { 
+  id          Int       @id @default(autoincrement())
+  titulo      String
+  descricao   String
+  dataCriacao DateTime  @default(now())
+  status      StatusDenuncia @default(pendente)
+  usuarioId   Int
+  usuario     Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+}
+
+enum StatusDenuncia {
+  pendente
+  em_analise
+  resolvida
 }

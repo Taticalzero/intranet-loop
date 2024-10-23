@@ -5,7 +5,7 @@ import { Toaster } from './_components/ui/toaster'
 import { NextAuthProvider } from './providers'
 import Hydrate from './_components/hydrate/hydrate'
 
-const inter = Poppins({
+const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
 })
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <Hydrate>
           <NextAuthProvider>
             {children}

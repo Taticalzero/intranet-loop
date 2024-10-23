@@ -17,9 +17,9 @@ import {
 import { Logo } from '@/app/_components/logo/logo'
 import {
   AlertTriangleIcon,
-  ChartPieIcon,
   HomeIcon,
   ShoppingCartIcon,
+  UserRoundPen,
   WalletIcon,
 } from 'lucide-react'
 import { UserDropdown } from './user-dropdown'
@@ -71,7 +71,7 @@ export function MainSidebar({ user }: MainSidebarProps) {
               href="/intranet/clima-gestao"
               active={isActive('/intranet/clima-gestao')}
             >
-              <ChartPieIcon className="w-3 h-3 mr-3" />
+              <UserRoundPen className="w-3 h-3 mr-3" />
               Clima e Gestão
             </DashboardSidebarNavLink>
             <DashboardSidebarNavLink

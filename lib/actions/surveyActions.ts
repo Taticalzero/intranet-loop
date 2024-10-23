@@ -18,6 +18,14 @@ export interface Answer {
 }
 export async function getSurveysForms() {
   try {
+    const session = await getServerSession(authOptions)
+
+    if (!session) {
+      throw new Error('Usuário não autenticado.')
+    }
+
+    const userId = session.user.id
+
     const surveys = await prisma.formulario.findMany({
       include: {
         questions: {
@@ -25,15 +33,25 @@ export async function getSurveysForms() {
             opcoes: true,
           },
         },
+        FormularioResposta: true,
       },
     })
-    return surveys
+
+    const surveysWithRespondido = surveys.map((survey) => ({
+      ...survey,
+      respondido: survey.FormularioResposta.some(
+        (resposta) => resposta.userId === String(userId)
+      ),
+    }))
+
+    revalidatePath('/intranet/clima-gestao')
+
+    return surveysWithRespondido
   } catch (error) {
     console.error('Erro ao trazer dados:', error)
     throw new Error('Falha ao trazer dados')
   }
 }
-
 export async function createSurvey(data: CreateSurveyData) {
   const deadline = addDays(new Date(), 7)
   try {
@@ -96,7 +114,7 @@ export async function submitAnswers(answers: Answer[], formularioId: number) {
         respostas: formattedAnswers,
       },
     })
-
+    revalidatePath('/intranet/clima-gestao')
     return { success: 'Formulário enviado com sucesso!' }
   } catch (error) {
     return { error: 'Erro ao salvar as respostas, tente novamente mais tarde.' }
@@ -219,4 +237,14 @@ export async function updateSurvey(
     console.error('Erro ao editar o formulário:', error)
     throw new Error('Erro ao editar o formulário')
   }
+}
+
+export async function getSurveyChartData() {
+  // Contar o total de respostas
+  const totalRespostas = await prisma.formularioResposta.count()
+
+  // Contar o total de formulários
+  const totalFormularios = await prisma.formulario.count()
+
+  return { totalRespostas, totalFormularios }
 }

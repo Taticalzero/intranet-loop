@@ -66,10 +66,12 @@ export default function SurveyForm({ user, forms }: FormsProps) {
       <Card className="w-full max-w-3xl mx-auto">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Formulários</CardTitle>
-          <Button onClick={handleAddNew}>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            Novo Formulário
-          </Button>
+          {user.cargo === 'Administrador' && (
+            <Button onClick={handleAddNew}>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Novo Formulário
+            </Button>
+          )}
         </CardHeader>
         <CardContent>
           <ul className="space-y-4">
@@ -106,7 +108,7 @@ export default function SurveyForm({ user, forms }: FormsProps) {
                       </Button>
                     </>
                   )}
-                  {form.dataLimite > new Date() ? (
+                  {form.dataLimite > new Date() && !form.respondido ? (
                     <Button
                       variant="default"
                       size="sm"

@@ -1,5 +1,5 @@
 import { activateUser } from '@/lib/actions/authActions'
-
+import { redirect } from 'next/navigation'
 interface Props {
   params: {
     jwt: string
@@ -8,6 +8,9 @@ interface Props {
 
 const ActivationPage = async ({ params }: Props) => {
   const result = await activateUser(params.jwt)
+  if (result === 'success') {
+    redirect('/auth/login')
+  }
   return (
     <div className="h-screen flex flex-col items-center justify-center">
       {result === 'userNotExist' ? (

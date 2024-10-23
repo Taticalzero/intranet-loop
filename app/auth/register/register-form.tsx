@@ -91,6 +91,7 @@ export default function RegisterForm() {
       toast({
         description: 'Algo deu errado , verifique os dados e tente novamente',
         title: 'Erro',
+        variant: 'destructive',
       })
       console.log(error)
     }

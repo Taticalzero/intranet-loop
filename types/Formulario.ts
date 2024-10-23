@@ -27,6 +27,7 @@ export type FormPage = {
   createdAt?: Date
   updatedAt?: Date
   questions: QuestaoPage[]
+  respondido: boolean
 }
 
 export type QuestaoPage = {

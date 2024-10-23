@@ -33,7 +33,12 @@
 - [X] Integrar com o BD
 ## 📝 PÁGINA DE DENÚNCIA
 - [X] Mock de dados
+- [ ] Mudança no Layout da Página - Tela User / Tela Admin
 - [ ] Desenvolver o CRUD da Página
+- [ ] Relátorio Demostrativo com Denúncias
+- [ ] Mudança no Tipos de Denúncia (Lista com tipos)
+- [ ] Introduçao de Textos LGPD - Garantia de Sigilo
+- [ ] Salvar Anexos PDF/IMG/
 - [ ] Regras de ADMIN / USER
 - [ ] Lógica para integrar ao banco de dados
 ## 📝 SWITCH MODO DARK/LIGHT (COMPONENTE)

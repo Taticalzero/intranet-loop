@@ -25,7 +25,6 @@ interface FormDialogProps {
   formulario: FormPage | null
 }
 
-// Componente de formulário separado
 function FormContent({
   formulario,
   onClose,
@@ -58,12 +57,9 @@ function FormContent({
       questionId: Number(key.split('_')[1]),
       answer: value,
     }))
-
     try {
       const response = await submitAnswers(answers, formulario.id)
-
       if (response?.error) {
-        // Exibir mensagem de erro no toast
         toast({
           title: 'Erro',
           description: response.error,
@@ -71,7 +67,6 @@ function FormContent({
         })
         onClose()
       } else {
-        // Exibir mensagem de sucesso no toast
         toast({
           title: 'Sucesso',
           description: response?.success,
@@ -80,8 +75,6 @@ function FormContent({
       }
     } catch (error) {
       console.error('Erro ao salvar as respostas:', error)
-
-      // Exibir mensagem de erro genérico no toast
       toast({
         title: 'Erro',
         description: 'Erro ao salvar as respostas, tente novamente mais tarde.',
@@ -173,7 +166,6 @@ function FormContent({
   )
 }
 
-// Componente principal AnswerDialog
 export default function AnswerDialog({
   isOpen,
   onClose,
